@@ -1,0 +1,55 @@
+<!-- <div align="right"><a class="btn btn-info" routerLink="/home">Home</a></div> -->
+<div class="content">
+	<div class=" row">
+    <div class=" col-12">
+		<form class="form tm-3 col-6" [formGroup]="loginForm" (ngSubmit)="submit()">
+			<div align="center" *ngIf="invalidLogin">
+				<div class="text-danger">{{message}}</div>
+			</div>
+			<div class="header" align="center"><h2><u>Login Form</u></h2></div>
+			<br><br>
+			<div class="form-group">
+				<label for="username">Email</label>
+				<input type="email" class="form-control" formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+				<div *ngIf="f.email.touched && f.email.invalid">
+						<small class="text-danger" *ngIf="f.email.errors?.required">
+							Email is required!
+						</small>
+						<small class="text-danger" *ngIf="f.email.errors?.pattern">
+							Use the correct email format!
+						</small>						
+					</div> 
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<div class="row">
+					<input [type]="passwordType" class="form-control col-sm col-10" formControlName="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+					 <a (click)="togglePasswordType(passwordType)"><i class="fo col-1" i-bs name="eye-fill"></i></a>
+				</div>
+				<div *ngIf="f.password.touched && (f.password || f.password.touched)">
+						<small class="text-danger" *ngIf="f.password.errors?.required">
+							Password is required!
+						</small>
+						<small class="text-danger" *ngIf="f.password.errors?.minlength">
+							Password is should be at least 8 characters!
+						</small>	
+						<small class="text-danger" *ngIf="f.password.errors?.pattern">
+							Your password must contain at least one uppercase, one lowercase, and one number!
+						</small>					
+				</div>
+			
+			</div>
+			<div>
+				<a routerLink="/register">Not Registered Yet? Sign Up</a>
+			</div>
+			<br/>
+			<div align="center" class="form-group">
+				<input [disabled]="loginForm.invalid" type="submit" value="submit" class="btn btn-danger col-6">
+			</div>
+			<br/>
+			
+		</form>
+	</div>
+</div>
+</div>
+

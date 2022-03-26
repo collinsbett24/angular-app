@@ -1,0 +1,52 @@
+<div class="content">
+Current user Location: {{lat}}, {{lng}}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" sortable="Name">Email</th>
+        <th scope="col" sortable="Year">Name</th>
+        <th scope="col" sortable="Color">Avatar</th>
+        <th scope="col" sortable="Pantone Value">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let users of UsersList  | slice: (page -2) * pageSize : page * pageSize">
+      <tr
+        >
+        <!-- <th scope="row">{{ (page -1) * pageSize + i + 1 }}</th> -->
+        <td>
+          {{ users.id | number }}
+        </td>
+        <td>{{ users.email }} </td>
+        <td> {{ users.first_name }} {{ users.last_name }}</td>
+        <td><img src="{{users.avatar}}"/></td>
+          <td>
+          <a  [routerLink]="['/editusers', users.id]" >
+            <div
+              class=" font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
+            >
+              <div class=" font-icon-detail">
+                <i class=" tim-icons icon-pencil"> </i>
+                <p>Edit</p>
+              </div>
+            </div>
+          </a>
+        </td>
+        <td>
+        <a (click)="onDelete(users.id)">
+          <div
+              class=" font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
+            >
+              <div class=" font-icon-detail">
+                <i class=" tim-icons icon-simple-remove"> </i>
+                <p>Delete</p>
+              </div>
+            </div>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<ngb-pagination [(page)]="page"  [pageSize]="pageSize"  [collectionSize]="collectionSize"></ngb-pagination>
+</div>
+<!-- <div *ngIf="!UsersList"><small class="text-danger">Failed to load data. Try again</small></div> -->

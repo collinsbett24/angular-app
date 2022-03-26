@@ -1,0 +1,49 @@
+<div class="content">
+	<div class=" row">
+    <div class=" col-12">
+	<form [formGroup]="addUserForm" (ngSubmit)="submit()" class="form tm-3 col-6">
+		<div class="header" align="center"><h2><u>Sign up Form</u></h2></div>
+			<div class="row">
+				<div class="form-group col-12">
+					<label for="email">Email:</label>
+					<input type="email" formControlName="email" class="form-control" pa
+					="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+					<div *ngIf="f.email.touched && f.email.invalid">
+						<small class="text-danger" *ngIf="f.email.errors?.required">
+							Email is required!
+						</small>
+						<small class="text-danger" *ngIf="f.email.errors?.pattern">
+							Use the correct email format!
+						</small>						
+					</div>
+				</div>
+			</div>
+			<br>
+			
+			<div class="row">
+				<div class="form-group col-12">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" formControlName="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+				<div *ngIf="f.password.touched && (f.password || f.password.touched)">
+						<small class="text-danger" *ngIf="f.password.errors?.required">
+							Password is required!
+						</small>
+						<small class="text-danger" *ngIf="f.password.errors?.minlength">
+							Password is should be at least 8 characters!
+						</small>	
+						<small class="text-danger" *ngIf="f.password.errors?.pattern">
+							Your password must contain at least one uppercase, one lowercase, and one number!
+						</small>					
+				</div>
+				</div>
+			</div>
+			<br/>
+			<div><a routerLink="/login">Already Registered? Login</a></div>
+			<br/>
+			<div align="center">
+				<input [disabled]="addUserForm.invalid" type="submit" value="Sign Up" class="btn btn-danger col-6">
+			</div>
+		</form>
+	</div>
+</div>
+	</div>
